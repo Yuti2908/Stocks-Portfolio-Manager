@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, Flask
 
-from app.Services.holdings import get_all_holdings, add_holding
+from app.Services.holdings import get_all_holdings, add_holding, sell_user_holdings
 
 holdings_bp = Blueprint('holdings', __name__)
 
@@ -16,3 +16,11 @@ def create_holding():
     quantity = request.form['quantity']
     add_holding(buyPrice,ticker,quantity)
     return jsonify({'message': 'Holding added successfully!'})
+
+@holdings_bp.route('/sell_holdings', methods=['POST'])
+def sell_holdings():
+    ticker = request.form['ticker']
+    sellPrice = request.form['sell_price']
+    quantity = request.form['quantity']
+    sell_user_holdings(ticker,sellPrice,quantity)
+    return jsonify({'message': 'Holding updated successfully!'})

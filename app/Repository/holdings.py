@@ -1,5 +1,6 @@
 import decimal
 
+import mysql
 from flask import jsonify
 
 from app.Repository.database_access import get_db_connection
@@ -46,3 +47,25 @@ def insert_holding(buyPrice,ticker,quantity):
     conn.commit()
     cur.close()
     conn.close()
+
+
+def update_holding(ticker,sellPrice,quantity):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    quantity = int(quantity)
+    check_ticker_exists = check_ticker(ticker)
+    print(check_ticker_exists["quantity"])
+    updated_quantity = (-quantity + check_ticker_exists["quantity"])
+    try:
+        if updated_quantity != 0:
+            query = "UPDATE holdings SET quantity = %s WHERE ticker = %s;"
+            cur.execute(query, (updated_quantity, ticker))
+        else:
+            query = "DELETE FROM holdings WHERE ticker = %s;"
+            cur.execute(query, (ticker,))
+    except mysql.connector.Error as err:
+        print(f"Error: {err}")
+    finally:
+        conn.commit()
+        cur.close()
+        conn.close()
