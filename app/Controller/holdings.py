@@ -11,6 +11,8 @@ def fetch_holdings():
 
 @holdings_bp.route('/', methods=['POST'])
 def create_holding():
-    data = request.json
-    add_holding(data)
+    ticker = request.form['ticker']
+    buyPrice = request.form['buy_price']
+    quantity = request.form['quantity']
+    add_holding(buyPrice,ticker,quantity)
     return jsonify({'message': 'Holding added successfully!'})
