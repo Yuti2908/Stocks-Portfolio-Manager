@@ -69,3 +69,4 @@ def update_holding(ticker,sellPrice,quantity):
         conn.commit()
         cur.close()
         conn.close()
+
