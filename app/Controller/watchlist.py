@@ -3,7 +3,8 @@ from app.Services.watchlist import (
     get_all_short_term_stock_watchlists,
     get_all_long_term_stock_watchlists,
     add_long_term_stock_watchlist,
-    add_short_term_stock_watchlist
+    add_short_term_stock_watchlist,
+    delete_stocks_watchlist_service
 )
 
 watchlist_bp = Blueprint('watchlist', __name__)
@@ -29,3 +30,10 @@ def add_short_term_stocks_watchlist():
     ticker = request.form['ticker']
     add_short_term_stock_watchlist(ticker)
     return jsonify({'message': 'Short term stock watchlist updated successfully!'})
+
+@watchlist_bp.route('/delete/', methods=['POST'])
+def delete_stocks_watchlist():
+    ticker = request.form['ticker']
+    watchlist_name = request.form['watchlist_name']
+    delete_stocks_watchlist_service(ticker, watchlist_name);
+    return jsonify({'message': 'Watchlist updated successfully!'})

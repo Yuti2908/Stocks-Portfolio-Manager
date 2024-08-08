@@ -38,3 +38,18 @@ def insert_short_term_stock_watchlist(ticker):
     conn.commit()
     cur.close()
     conn.close()
+
+
+def delete_stocks_watchlist_repository(ticker,watchlist_name):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    try:
+        cur.execute(
+            "DELETE FROM watchlist WHERE watchlist_name = %s AND ticker = %s;",
+            (watchlist_name ,ticker)
+        )
+        conn.commit()
+    except Exception as e:
+        print(e)
+    cur.close()
+    conn.close()
