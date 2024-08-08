@@ -8,10 +8,14 @@ def fetch_all_transactions():
     cur.close()
     return transactions
 
-def insert_transaction(buyPrice, ticker):
+def insert_transaction(price, ticker, trans_type, quantity, date):
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("INSERT INTO transactions (user_id, ticker, trans_type, quantity, price_per_charge, tot_amnt) VALUES (%s, %s, %s, %s, %s, %s)",
-                (data['user_id'], data['ticker'], data['trans_type'], data['quantity'], data['price_per_charge'], data['tot_amnt']))
+    quantity=int(quantity)
+    price=int(price)
+    print("Inserting into transaction table")
+    cur.execute("INSERT INTO transactions (user_id, ticker, trans_type, quantity, price_per_charge, tot_amnt, date) VALUES (%s, %s, %s, %s, %s, %s, %s)",
+                (1, ticker, trans_type, quantity, price, quantity*price, date))
+    conn.commit()
     conn.close()
     cur.close()

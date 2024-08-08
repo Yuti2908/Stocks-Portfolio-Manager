@@ -8,8 +8,3 @@ def fetch_transactions():
     transactions = get_all_transactions()
     return jsonify(transactions)
 
-@transactions_bp.route('/', methods=['POST'])
-def create_transaction():
-    data = request.json
-    add_transaction(data)
-    return jsonify({'message': 'Transaction added successfully!'})
