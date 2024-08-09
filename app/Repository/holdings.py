@@ -4,14 +4,28 @@ import mysql
 from flask import jsonify
 
 from app.Repository.database_access import get_db_connection
+from app.Repository.yahoo_api import get_yahoo_data
 
 def fetch_all_holdings():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM holdings WHERE user_id='1'")
+    cur.execute("SELECT * FROM holdings")
+    holdings = cur.fetchall()
+    columns = [desc[0] for desc in cur.description]
+    ticker_index = columns.index('ticker')
+    ticker_values = [row[ticker_index] for row in holdings]
+    print(ticker_values)
+    for ticker in ticker_values:
+        closing_price = get_yahoo_data(ticker)
+        print(closing_price,ticker)
+        update_query = "UPDATE holdings SET current_value = %s WHERE ticker = %s"
+        cur.execute(update_query, (closing_price, ticker))
+    conn.commit()
+    cur.execute("SELECT * FROM holdings")
     holdings = cur.fetchall()
     cur.close()
     conn.close()
+
     return holdings
 
 
@@ -31,6 +45,7 @@ def check_ticker(ticker):
 def insert_holding(buyPrice,ticker,quantity):
     conn = get_db_connection()
     cur = conn.cursor()
+    ticker = ticker.upper()
     print(ticker,quantity,buyPrice)
     buyPrice = decimal.Decimal(buyPrice)
     quantity = int(quantity)
@@ -53,6 +68,7 @@ def update_holding(ticker,sellPrice,quantity):
     conn = get_db_connection()
     cur = conn.cursor()
     quantity = int(quantity)
+    ticker = ticker.upper()
     check_ticker_exists = check_ticker(ticker)
     print(check_ticker_exists["quantity"])
     updated_quantity = (-quantity + check_ticker_exists["quantity"])
