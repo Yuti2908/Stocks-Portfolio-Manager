@@ -1,0 +1,8 @@
+Flask
+Flask-MySQLdb
+python-dotenv
+flasgger
+mysql-connector-python
+SQLAlchemy
+yahoo_fin
+requests_html
