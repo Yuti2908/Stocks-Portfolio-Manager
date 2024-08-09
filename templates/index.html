@@ -500,16 +500,19 @@
                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modaltab1">
                     <i class="zmdi zmdi-plus"></i>add item</button>
                 <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                    <select class="js-select2" name="type">
+                    <!-- <select class="js-select2" name="type">
                         <option selected="selected">Export</option>
                         <option value="">Save as pdf</option>
-                    </select>
-                    <div class="dropDownSelect2"></div>
+                    </select> -->
+                    <button id="exportButton1" class="btn btn-primary" style="background-color: brown; color: white;">Export to PDF</button>
+
+                    <!-- <div class="dropDownSelect2"></div> -->
                 </div>
             </div>
         </div>
         <div class="table-responsive table-responsive-data2">
-            <table class="table table-data2">
+            
+                <table class="table table-data2" id="table1">
                 <thead>
                     <tr>
                         <th>Ticker</th>
@@ -999,8 +1002,8 @@
         }
 
         exportTableToPDF("exportButton1","table1");
-        exportTableToPDF("exportButton2","table2");
-        exportTableToPDF("exportButton3","table3");
+        // exportTableToPDF("exportButton2","table2");
+        // exportTableToPDF("exportButton3","table3");
     </script>
 
 </body>
