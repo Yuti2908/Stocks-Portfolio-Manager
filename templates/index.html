@@ -32,6 +32,16 @@
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <style>
+        .hide-during-export {
+            display: none !important;
+        }
+    </style>
+    
+
 
 </head>
 
@@ -477,9 +487,9 @@
 											<nav>
 												<div class="nav nav-tabs" id="nav-tab" role="tablist">
 													<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
-													 aria-selected="true">Transaction</a>
+													 aria-selected="true">Holdings</a>
 													<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
-													 aria-selected="false">Holding</a>
+													 aria-selected="false">Transaction</a>
 													<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact"
 													 aria-selected="false">Watchlist</a>
 												</div>
@@ -515,16 +525,18 @@
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modaltab1">
                                             <i class="zmdi zmdi-plus"></i>add item</button>
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select class="js-select2" name="type">
+                                            <!-- <select class="js-select2" name="type">
                                                 <option selected="selected">Export</option>
                                                 <option value="">Save as pdf</option>
-                                            </select>
+                                            </select> -->
+                                            <button id="exportButton1" class="btn btn-primary">Export to PDF</button>
+
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
+                                    <table class="table table-data2" id="table1">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -534,11 +546,11 @@
                                                     </label>
                                                 </th>
                                                 <th>Ticker</th>
-                                                <th>Type</th>
-                                                <th>Date & Type</th>
                                                 <th>Quantity</th>
-                                                <th>Price per Share</th>
-                                                <th>Total Amount</th>
+                                                <th>Purchase Price</th>
+                                                <th>Current Price</th>
+                                                <th>Profit</th>
+                                                <th>Profit %</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -711,16 +723,18 @@
                                     </div>
                                     <div class="table-data__tool-right">
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select class="js-select2" name="type">
+                                            <!-- <select class="js-select2" name="type">
                                                 <option selected="selected">Export</option>
                                                 <option value="">Save as pdf</option>
-                                            </select>
+                                            </select> -->
+                                            <button id="exportButton2" class="btn btn-primary">Export to PDF</button>
+
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
+                                    <table class="table table-data2" id="table2">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -731,10 +745,10 @@
                                                 </th>
                                                 <th>Ticker</th>
                                                 <th>Quantity</th>
-                                                <th>Avg Purchase Price</th>
-                                                <th>Current Value</th>
-                                                <th>Unrealized Gain/Loss</th>
-                                                <th>Last Updated</th>
+                                                <th>Action Type</th>
+                                                <th>Price</th>
+                                                <th>Date</th>
+                                                <!-- <th>Last </th> -->
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -906,16 +920,18 @@
                                         <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modaltab3">
                                             <i class="zmdi zmdi-plus"></i>add item</button>
                                         <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                                            <select class="js-select2" name="type">
+                                            <!-- <select class="js-select2" name="type">
                                                 <option selected="selected">Export</option>
                                                 <option value="">Save as pdf</option>
-                                            </select>
+                                            </select> -->
+                                            <button id="exportButton3" class="btn btn-primary">Export to PDF</button>
+
                                             <div class="dropDownSelect2"></div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="table-responsive table-responsive-data2">
-                                    <table class="table table-data2">
+                                    <table class="table table-data2" id="table3">
                                         <thead>
                                             <tr>
                                                 <th>
@@ -929,7 +945,7 @@
                                                 <th>Current Price</th>
                                                 <th>Change(%)</th>
                                                 <th>Last Updated</th>
-                                                <!-- <th>price</th> -->
+                                                <th>Watchlist Stock ID</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -1285,6 +1301,41 @@
                 });
             });
         });
+        function exportTableToPDF(buttonId,tableId) {
+            document.getElementById(buttonId).addEventListener("click", function() {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                const table = document.getElementById(tableId);
+
+                const buttons = table.querySelectorAll('.table-data-feature');
+                buttons.forEach(button => button.classList.add('hide-during-export'));
+
+                html2canvas(table).then(canvas => {
+                    const imgData = canvas.toDataURL('image/png');
+                    const imgWidth = 210;
+                    const pageHeight = 297;
+                    const imgHeight = canvas.height * imgWidth / canvas.width;
+                    let heightLeft = imgHeight;
+                    let position = 0;
+
+                    doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+
+                    while (heightLeft >= 0) {
+                        position = heightLeft - imgHeight;
+                        doc.addPage();
+                        doc.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                        heightLeft -= pageHeight;
+                    }
+
+                    doc.save(`${tableId}.pdf`);
+                });
+            });
+        }
+
+        exportTableToPDF("exportButton1","table1");
+        exportTableToPDF("exportButton2","table2");
+        exportTableToPDF("exportButton3","table3");
     </script>
 
 </body>
