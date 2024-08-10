@@ -1,36 +1,36 @@
 // JavaScript file (main.js)
 
-document.addEventListener("DOMContentLoaded", function() {
-  // Sample data for demonstration
-  const demoData1 = [
-      { ticker: "AAL", quantity: "15", purchaseprice: "$120.50", currentprice: "$150.00", profit: "$40.00", profit: "12%" },
-      { ticker: "SAPL", quantity: "10", purchaseprice: "$10.50", currentprice: "$10.00", profit: "$10.00", profit: "1%" }
-  ];
-
-  const demoData2 = [
-      { name: "Alice Green", email: "alice@example.com", description: "Laptop Dell XPS", date: "2018-10-11 12:10", status: "Shipped", price: "$1499.00" },
-      { name: "Bob Brown", email: "bob@example.com", description: "MacBook Pro", date: "2018-10-15 14:22", status: "Delivered", price: "$1999.00" }
-  ];
-
-  const demoData3 = [
-      { name: "Jane White", email: "jane@example.com", description: "Headphones Sony", date: "2018-11-02 08:45", status: "Pending", price: "$299.00" },
-      { name: "Tom Black", email: "tom@example.com", description: "Smartwatch Apple", date: "2018-11-05 11:30", status: "Processed", price: "$399.00" }
-  ];
-
-  // Function to create a row
-  function createRow1(data) {
-    return `
-        <tr class="tr-shadow">
-            <td>${data.ticker}</td>
-            <td>${data.quantity}</td>
-            <td>${data.purchaseprice}</td>
-            <td>${data.currentprice}</td>
-            <td>${data.profit}</td>
-            <td>${data.profitPercentage}</td>
-        </tr>
-        <tr class="spacer"></tr>
-    `;
-}
+// document.addEventListener("DOMContentLoaded", function() {
+//   // Sample data for demonstration
+//   const demoData1 = [
+//       { ticker: "AAL", quantity: "15", purchaseprice: "$120.50", currentprice: "$150.00", profit: "$40.00", profit: "12%" },
+//       { ticker: "SAPL", quantity: "10", purchaseprice: "$10.50", currentprice: "$10.00", profit: "$10.00", profit: "1%" }
+//   ];
+//
+//   const demoData2 = [
+//       { name: "Alice Green", email: "alice@example.com", description: "Laptop Dell XPS", date: "2018-10-11 12:10", status: "Shipped", price: "$1499.00" },
+//       { name: "Bob Brown", email: "bob@example.com", description: "MacBook Pro", date: "2018-10-15 14:22", status: "Delivered", price: "$1999.00" }
+//   ];
+//
+//   const demoData3 = [
+//       { name: "Jane White", email: "jane@example.com", description: "Headphones Sony", date: "2018-11-02 08:45", status: "Pending", price: "$299.00" },
+//       { name: "Tom Black", email: "tom@example.com", description: "Smartwatch Apple", date: "2018-11-05 11:30", status: "Processed", price: "$399.00" }
+//   ];
+//
+//   // Function to create a row
+//   function createRow1(data) {
+//     return `
+//         <tr class="tr-shadow">
+//             <td>${data.ticker}</td>
+//             <td>${data.quantity}</td>
+//             <td>${data.purchaseprice}</td>
+//             <td>${data.currentprice}</td>
+//             <td>${data.profit}</td>
+//             <td>${data.profitPercentage}</td>
+//         </tr>
+//         <tr class="spacer"></tr>
+//     `;
+// }
   // function createRow(data) {
   //     return `
   //         <tr class="tr-shadow">
@@ -68,18 +68,18 @@ document.addEventListener("DOMContentLoaded", function() {
   // }
 
   // Function to populate a table with data
-  function populateTable(tableId, data,createRow) {
-      const tableBody = document.querySelector(`#${tableId} tbody`);
-      data.forEach(item => {
-          tableBody.innerHTML += createRow(item);
-      });
-  }
-
-  // Populate each table with its respective data
-  populateTable("table1", demoData1,createRow1);
-  populateTable("table2", demoData2,createRow1);
-  populateTable("table3", demoData3,createRow1);
-});
+//   function populateTable(tableId, data,createRow) {
+//       const tableBody = document.querySelector(`#${tableId} tbody`);
+//       data.forEach(item => {
+//           tableBody.innerHTML += createRow(item);
+//       });
+//   }
+//
+//   // Populate each table with its respective data
+//   populateTable("table1", demoData1,createRow1);
+//   populateTable("table2", demoData2,createRow1);
+//   populateTable("table3", demoData3,createRow1);
+// });
 
 (function ($) {
   // USE STRICT

@@ -49,19 +49,6 @@ var customPieChart = new Chart(ctxCustomPie, {
     }
 });
 
-document.getElementById('sellButton').addEventListener('click', function() {
-    const quantity = parseInt(document.getElementById('stockquantity').value, 10);
-    const currentHolding = 100; // This value will be dynamic in the future
 
-    if (isNaN(quantity) || quantity <= 0) {
-        alert('Please enter a valid quantity.');
-    } else if (quantity > currentHolding) {
-        alert('Quantity exceeds current holding. Please enter a valid amount.');
-    } else {
-        // Quantity is valid and within the holding limit
-        alert('Stock sold successfully!');
-        // You can trigger the form submission or AJAX call here
-    }
-});
 
 
