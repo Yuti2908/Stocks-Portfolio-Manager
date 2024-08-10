@@ -10,7 +10,7 @@ from app.Services.watchlist import add_short_term_stock_watchlist, add_long_term
 import os
 
 def create_app():
-    app = Flask(__name__, template_folder="C:\\Users\\Yutika.P\\Documents\\Stocks Portfolio Manager\\templates", static_folder="C:\\Users\\Yutika.P\\Documents\\Stocks Portfolio Manager\\templates")
+    app = Flask(__name__, template_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates", static_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates")
     # app.config.from_object('config')
 
     # mysql.init_app(app)
@@ -18,14 +18,14 @@ def create_app():
     from app.Controller.transactions import transactions_bp
     from app.Controller.holdings import holdings_bp
     from app.Controller.watchlist import watchlist_bp
-    #from app.Controller.user import user_bp
+    from app.Controller.user import user_bp
     # from app.Controller.start import start_bp
 
     app.register_blueprint(transactions_bp, url_prefix='/transactions')
     app.register_blueprint(holdings_bp, url_prefix='/holdings')
     app.register_blueprint(watchlist_bp, url_prefix='/watchlist')
     # app.register_blueprint(start_bp, url_prefix='/start')
-    # app.register_blueprint(user_bp, url_prefix='/user')
+    app.register_blueprint(user_bp, url_prefix='/userDetails')
 
     @app.route("/start")
     def start():
@@ -156,6 +156,8 @@ def create_app():
         return redirect(url_for('delsuccess'))
 
     return app
+
+
 
 if __name__=='__main__':
     app=create_app()
