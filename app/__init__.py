@@ -7,6 +7,7 @@ from app.Repository.watchlist import fetch_all_short_term_stock_watchlists, fetc
 from app.Services.holdings import add_holding, sell_user_holdings
 from app.Services.transactions import add_transaction
 from app.Services.watchlist import add_short_term_stock_watchlist, add_long_term_stock_watchlist, delete_stocks_watchlist_service
+from app.Services.user import add_cash_service
 import os
 
 def create_app():
@@ -146,6 +147,12 @@ def create_app():
         ticker = request.form['ticker']
         watchlist_name = 'short'
         delete_stocks_watchlist_service(ticker, watchlist_name);
+        return redirect(url_for('delsuccess'))
+
+    @app.route("/addcash", methods=['POST'])
+    def addcash():
+        added_cash = request.form['added_cash']
+        add_cash_service(added_cash)
         return redirect(url_for('delsuccess'))
 
     @app.route("/delwatchlong", methods=['POST'])

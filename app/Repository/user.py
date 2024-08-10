@@ -23,5 +23,37 @@ def user_profits_repository():
         conn.close()
         cur.close()
 
+def add_cash_repository(added_cash):
+    conn = get_db_connection()
+    cur = conn.cursor()
+    query = "SELECT DISTINCT cash FROM user_table LIMIT 1;"
+    try:
+        cur.execute(query)
+        result = cur.fetchone()
+
+        if result:
+            if result[0] == None:
+                total_cash = added_cash
+            else:
+                total_cash = int(result[0]) + added_cash
+
+            update_query = "UPDATE user_table SET cash = %s"
+            print(total_cash)
+            cur.execute(update_query, (total_cash,))
+            print(" Current Cash:", total_cash)
+
+        else:
+            print("No data found.")
+
+    except Exception as e:
+        print(f"Error: {e}")
+    finally:
+        conn.commit()
+        cur.close()
+        conn.close()
+
 if __name__=='__main__':
-    user_profits_repository()
+    # user_profits_repository()
+    add_cash_repository(10000)
+
+
