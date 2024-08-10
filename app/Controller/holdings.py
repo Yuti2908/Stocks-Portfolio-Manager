@@ -64,6 +64,7 @@ def create_holding():
             message:
               type: string
     """
+    print(request.form)
     ticker = request.form['ticker']
     buyPrice = request.form['buy_price']
     quantity = request.form['quantity']

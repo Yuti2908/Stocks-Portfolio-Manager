@@ -8,7 +8,7 @@ from app.Repository.database_access import get_db_connection
 def fetch_all_holdings():
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute("SELECT * FROM holdings WHERE user_id='1'")
+    cur.execute("SELECT * FROM holdings")
     holdings = cur.fetchall()
     cur.close()
     conn.close()
