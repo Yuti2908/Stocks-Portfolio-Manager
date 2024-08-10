@@ -32,12 +32,14 @@ def updateRealisedProfit(profit):
         conn.close()
 
 def updateUnrealisedProfit():
-    unrealisedProfit = calculateUnrealisedProfit()
+    result = calculateUnrealisedProfitAndInvestedAmnt()
+    unrealisedProfit = result["unrealisedProfit"]
+    investedAmn = result["invested_amnt"]
     print(unrealisedProfit)
-    query = "UPDATE user_table SET unrealised_profit = %s"
+    query = "UPDATE user_table SET unrealised_profit = %s AND invested_amnt = %s"
     conn = get_db_connection()
     cur = conn.cursor()
-    cur.execute(query, (unrealisedProfit,))
+    cur.execute(query, (unrealisedProfit,investedAmn))
     conn.commit()
     cur.close()
     conn.close()
@@ -65,7 +67,7 @@ def fetch_all_holdings():
     updateUnrealisedProfit()
     return holdings
 
-def calculateUnrealisedProfit():
+def calculateUnrealisedProfitAndInvestedAmnt():
     conn = get_db_connection()
     cur = conn.cursor()
     cur.execute("SELECT * FROM holdings")
@@ -75,11 +77,13 @@ def calculateUnrealisedProfit():
     buyPrice_index = columns.index('avg_purchasing_price')
     currentPrice_index = columns.index('current_value')
     unrealisedProfit = 0
+    invested_amnt=0
     for holding in holdings:
+        invested_amnt = invested_amnt + holding[quantity_index]*holding[buyPrice_index]
         unrealisedProfit+=holding[quantity_index]*(-holding[buyPrice_index]+holding[currentPrice_index])
     cur.close()
     conn.close()
-    return unrealisedProfit
+    return {"unrealisedProfit":unrealisedProfit, "invested_amnt":invested_amnt}
 
 def check_ticker(ticker):
     conn = get_db_connection()
