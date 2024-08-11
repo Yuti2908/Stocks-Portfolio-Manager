@@ -7,6 +7,7 @@ from app.Repository.watchlist import fetch_all_short_term_stock_watchlists, fetc
 from app.Services.holdings import add_holding, sell_user_holdings
 from app.Services.transactions import add_transaction
 from app.Services.watchlist import add_short_term_stock_watchlist, add_long_term_stock_watchlist, delete_stocks_watchlist_service
+from app.Services.user import add_cash_service
 import os
 
 def create_app():
@@ -19,6 +20,7 @@ def create_app():
     from app.Controller.holdings import holdings_bp
     from app.Controller.watchlist import watchlist_bp
     from app.Controller.user import user_bp
+    from app.Controller.chart_distribution import chart_distribution_bp
     # from app.Controller.start import start_bp
 
     app.register_blueprint(transactions_bp, url_prefix='/transactions')
@@ -26,6 +28,7 @@ def create_app():
     app.register_blueprint(watchlist_bp, url_prefix='/watchlist')
     # app.register_blueprint(start_bp, url_prefix='/start')
     app.register_blueprint(user_bp, url_prefix='/userDetails')
+    app.register_blueprint(chart_distribution_bp, url_prefix='/chartDistribution')
 
     @app.route("/start")
     def start():
@@ -74,6 +77,7 @@ def create_app():
             else:
                 dic['price'] = float(i[3])
             longlst.append(dic)
+
         return render_template("index.html",holdings=lst,transactions=translst,watchlistshort=shortlst,watchlistlong=longlst)
 
     @app.route("/sellerror")
@@ -146,6 +150,12 @@ def create_app():
         ticker = request.form['ticker']
         watchlist_name = 'short'
         delete_stocks_watchlist_service(ticker, watchlist_name);
+        return redirect(url_for('delsuccess'))
+
+    @app.route("/addcash", methods=['POST'])
+    def addcash():
+        added_cash = request.form['added_cash']
+        add_cash_service(added_cash)
         return redirect(url_for('delsuccess'))
 
     @app.route("/delwatchlong", methods=['POST'])

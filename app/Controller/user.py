@@ -8,5 +8,6 @@ def user_profits():
     result = user_profits_service();
     return result
 
+
 if __name__=='__main__':
     user_profits()
