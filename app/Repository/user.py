@@ -4,7 +4,7 @@ from app.Repository.database_access import get_db_connection
 def user_profits_repository():
     conn = get_db_connection()
     cur = conn.cursor()
-    query = "SELECT DISTINCT realised_profit,unrealised_profit,cash,invested_amnt FROM user_table LIMIT 1;"
+    query = "SELECT realised_profit,unrealised_profit,cash,invested_amnt FROM user_table WHERE user_id=1;"
     try:
         cur.execute(query)
         result = cur.fetchone()
@@ -27,6 +27,7 @@ def add_cash_repository(added_cash):
     conn = get_db_connection()
     cur = conn.cursor()
     query = "SELECT DISTINCT cash FROM user_table LIMIT 1;"
+    print(query)
     try:
         cur.execute(query)
         result = cur.fetchone()
@@ -53,7 +54,7 @@ def add_cash_repository(added_cash):
         conn.close()
 
 if __name__=='__main__':
-    # user_profits_repository()
-    add_cash_repository(10000)
+    user_profits_repository()
+    # add_cash_repository(10000)
 
 
