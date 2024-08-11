@@ -8,7 +8,6 @@ from app.Services.holdings import add_holding, sell_user_holdings
 from app.Services.transactions import add_transaction
 from app.Services.watchlist import add_short_term_stock_watchlist, add_long_term_stock_watchlist, delete_stocks_watchlist_service
 from app.Services.user import add_cash_service
-import os
 
 def create_app():
     app = Flask(__name__, template_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates", static_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates")
