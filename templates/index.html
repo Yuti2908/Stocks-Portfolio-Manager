@@ -58,11 +58,10 @@
             <div class="menu-sidebar__content js-scrollbar1">
                 <div class="account2">
                     <div class="image img-cir img-120">
-                        <img src="{{ url_for('static', filename='images/icon/avatar-big-01.jpg') }}" alt="John Doe" />
+                        <img src="{{ url_for('static', filename='images/icon/avatar-01.png') }}" alt="John Doe" />
 
                     </div>
-                    <h4 class="name">Welcome john doe</h4>
-                    <a href="#">Sign out</a>
+                    <h4 class="name">Welcome Sonal Jose</h4>
                 </div>
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
@@ -83,10 +82,11 @@
                                 <i class="fas fa-copy"></i>Account</a>
                             <ul class="list-unstyled navbar__sub-list js-sub-list">
                                 <li>
-                                    <a href="register.html">New Register</a>
+                                    <a href="{{url_for('register')}}">New Register</a>
                                 </li>
                                 <li>
-                                    <a href="forget-pass.html">Change Password</a>
+                                    <a href="{{url_for('changepwd')}}">Change Password</a>
+
                                 </li>
                             </ul>
                         </li>
@@ -103,8 +103,8 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            <form class="form-header" action="" method="POST">
-                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
+                            <form class="form-header" action="">
+                                <input class="au-input au-input--xl" type="text" name="search" placeholder="Search " />
                                 <button class="au-btn--submit" type="submit">
                                     <i class="zmdi zmdi-search"></i>
                                 </button>
@@ -112,105 +112,94 @@
                             <div class="header-button">
                                 <div class="noti-wrap">
                                     <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-comment-more"></i>
-                                        <span class="quantity">2</span>
-                                        <div class="mess-dropdown js-dropdown">
-                                            <div class="mess__title">
-                                                <p>You have 2 news message</p>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="{{ url_for('static', filename='images/icon/avatar-06.jpg') }}" alt="Michelle Moreno" />
+    <i class="zmdi zmdi-chart"></i> <!-- Stock chart icon -->
+    <span class="quantity">2</span>
+    <div class="mess-dropdown js-dropdown">
+        <div class="mess__title">
+            <p>You have 2 new stock insights</p> <!-- Updated title -->
+        </div>
+        <div class="mess__item">
+            <div class="image img-cir img-40">
+                <i class="zmdi zmdi-trending-up" style="font-size: 22px;"></i> <!-- Use a built-in "trending up" icon -->
+            </div>
+            <div class="content">
+                <h6>Market Tip</h6> <!-- Stock-related message -->
+                <p>Buy low, sell high!</p> <!-- Stock-related quote -->
+            </div>
+        </div>
+        <div class="mess__item">
+            <div class="image img-cir img-40">
+                <i class="zmdi zmdi-balance" style="font-size: 22px;"></i> <!-- Use a built-in "balance" icon -->
+            </div>
+            <div class="content">
+                <h6>Investment Wisdom</h6> <!-- Stock-related message -->
+                <p>Time in the market beats timing the market.</p> <!-- Another stock-related quote -->
+            </div>
+        </div>
+    </div>
+</div>
 
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Michelle Moreno</h6>
-                                                    <p>Your are now connected on message</p>
-                                                    <span class="time">3 min ago</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="{{ url_for('static', filename='images/icon/avatar-04.jpg') }}" alt="Michelle Moreno" />
-
-                                                </div>
-                                                <div class="content">
-                                                    <h6>Diane Myers</h6>
-                                                    <p>Welcome Back</p>
-                                                    <span class="time">Yesterday</span>
-                                                </div>
-                                            </div>
-                                            <div class="mess__footer">
-                                                <a href="#">View all messages</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-email"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="email-dropdown js-dropdown">
-                                            <div class="email__title">
-                                                <p>You have 1 New Emails</p>
-                                            </div>
-                                            <div class="email__item">
-                                                <div class="image img-cir img-40">
-                                                    <img src="{{ url_for('static', filename='images/icon/avatar-05.jpg') }}" alt="Michelle Moreno" />
+    <i class="zmdi zmdi-email"></i>
+    <span class="quantity">1</span>
+    <div class="email-dropdown js-dropdown">
+        <div class="email__title">
+            <p>You have 1 New Update</p> <!-- Updated title -->
+        </div>
+        <div class="email__item">
+            <div class="image img-cir img-40">
+                <i class="zmdi zmdi-money-box" style="font-size: 24px;"></i> <!-- Use a stock/money related icon -->
+            </div>
+            <div class="content">
+                <p>New stock recommendation: Buy AAPL</p> <!-- Stock-related email content -->
+                <span>Market Analyst, Today</span>
+            </div>
+        </div>
+    </div>
+</div>
 
-                                                </div>
-                                                <div class="content">
-                                                    <p>Welcome Back email</p>
-                                                    <span>Cynthia Harvey, Today</span>
-                                                </div>
-                                            </div>
-                                            <div class="email__footer">
-                                                <a href="#">See all emails</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <div class="noti__item js-item-menu">
-                                        <i class="zmdi zmdi-notifications"></i>
-                                        <span class="quantity">1</span>
-                                        <div class="notifi-dropdown js-dropdown">
-                                            <div class="notifi__title">
-                                                <p>You have 1 Notification</p>
-                                            </div>
-                                            <div class="notifi__item">
-                                                <div class="bg-c1 img-cir img-40">
-                                                    <i class="zmdi zmdi-email-open"></i>
-                                                </div>
-                                                <div class="content">
-                                                    <p>Welcome back John Doe</p>
-                                                    <span class="date">Aug 12, 2024 06:50</span>
-                                                </div>
-                                            </div>
-                                            <div class="notifi__footer">
-                                                <a href="#">All notifications</a>
-                                            </div>
-                                        </div>
-                                    </div>
+    <i class="zmdi zmdi-notifications"></i>
+    <span class="quantity">1</span>
+    <div class="notifi-dropdown js-dropdown">
+        <div class="notifi__title">
+            <p>You have 1 Notification</p> <!-- Updated title -->
+        </div>
+        <div class="notifi__item">
+            <div class="bg-c1 img-cir img-40">
+                <i class="zmdi zmdi-trending-up"></i> <!-- Use a stock/market-related icon -->
+            </div>
+            <div class="content">
+                <p>Stock Alert: TSLA price up by 5%</p> <!-- Stock-related notification content -->
+                <span class="date">Aug 12, 2024 06:50</span>
+            </div>
+        </div>
+    </div>
+</div>
+
                                 </div>
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
-                                            <img src="{{ url_for('static', filename='images/icon/avatar-01.jpg') }}" alt="Michelle Moreno" />
+                                            <img src="{{ url_for('static', filename='images/icon/avatar-01.png') }}" alt="Michelle Moreno" />
 
                                         </div>
                                         <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
+                                            <a class="js-acc-btn" href="#">Sonal Jose</a>
                                         </div>
                                         <div class="account-dropdown js-dropdown">
                                             <div class="info clearfix">
                                                 <div class="image">
                                                     <a href="#">
-                                                        <img src="{{ url_for('static', filename='images/icon/avatar-01.jpg') }}" alt="Michelle Moreno" />
+                                                        <img src="{{ url_for('static', filename='images/icon/avatar-01.png') }}" alt="Michelle Moreno" />
 
                                                     </a>
                                                 </div>
                                                 <div class="content">
                                                     <h5 class="name">
-                                                        <a href="#">john doe</a>
+                                                        <a href="#">Sonal Jose</a>
                                                     </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                    <span class="email">sonal.jose@neueda.com</span>
                                                 </div>
                                             </div>
                                             <div class="account-dropdown__footer">
@@ -229,16 +218,19 @@
 
             <!-- MAIN CONTENT-->
             <div class="main-content" id="overview">
-                <div class="section__content section__content--p30">
-                    <div class="container-fluid">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="overview-wrap">
-                                    <h2 class="title-1">overview</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row m-t-25">
+    <div class="section__content section__content--p30">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="overview-wrap">
+                        <h2 class="title-1">overview</h2>
+                        <button type="button" class="au-btn au-btn-icon au-btn--blue" data-toggle="modal" data-target="#addcashmodal" style="margin-left: auto;">
+                            <i class="zmdi zmdi-plus"></i>Add Cash
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-t-25">
     <div class="col-sm-6 col-lg-3">
         <div class="overview-item overview-item--c1">
             <div class="overview__inner">
@@ -247,7 +239,7 @@
                         <i class="zmdi zmdi-balance-wallet"></i>
                     </div>
                     <div class="text">
-                        <h2>$5,000,000</h2>
+                        <h2>${{invested_amount+cash}}</h2>
                         <span>Total Net Worth</span>
                     </div>
                 </div>
@@ -257,15 +249,16 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-6 col-lg-3">
+     <div class="col-sm-6 col-lg-3">
         <div class="overview-item overview-item--c2">
             <div class="overview__inner">
                 <div class="overview-box clearfix">
                     <div class="icon">
                         <i class="zmdi zmdi-money-box"></i>
                     </div>
+                    <br>
                     <div class="text">
-                        <h2>$1,200,000</h2>
+                        <h2>${{cash}}</h2>
                         <span>Total Cash</span>
                     </div>
                 </div>
@@ -283,7 +276,7 @@
                         <i class="zmdi zmdi-trending-up"></i>
                     </div>
                     <div class="text">
-                        <h2>$3,000,000</h2>
+                        <h2>${{invested_amount}}</h2>
                         <span>Invested Amount</span>
                     </div>
                 </div>
@@ -301,7 +294,7 @@
                         <i class="zmdi zmdi-view-list"></i>
                     </div>
                     <div class="text">
-                        <h2>25</h2>
+                        <h2>{{stocks}}</h2>
                         <span>No. of Distinct Stocks</span>
                     </div>
                 </div>
@@ -321,29 +314,36 @@
 
     <div class="row m-t-25" style="display: flex; gap: 20px;">
 
-        <!-- Updated Bar Chart Structure -->
-        <div class="col-lg-6" style="flex: 1;">
-            <div class="au-card chart-percent-card" style="height: 300px; padding: 10px; box-sizing: border-box;">
-                <div class="au-card-inner" style="padding: 0; box-sizing: border-box;">
-                    <h3 class="title-2 tm-b-5" style="margin-bottom: 10px;">Realized vs Unrealized Profit</h3>
-                    <div class="chart-container" style="height: calc(100% - 30px); width: 100%;">
-                        <canvas id="customBarChart" style="height: 100%; width: 100%;"></canvas>
-                    </div>
-                </div>
+        <!-- Bar Chart for Realized vs Unrealized Profit -->
+<div class="col-lg-6" style="flex: 1;">
+    <div class="au-card chart-percent-card" style="height: 325px; padding: 10px; box-sizing: border-box;">
+        <div class="au-card-inner" style="padding: 0; box-sizing: border-box;">
+            <h3 class="title-2 tm-b-5 mt-2" style="margin-bottom: 10px;">Realized vs Unrealized Profit</h3>
+            <div class="chart-container" style="height: calc(100% - 30px); width: 100%;">
+                <canvas id="customBarChart"
+                        data-labels="Realized Profit, Unrealized Profit"
+                        data-values="{{ realized_profit }}, {{ unrealized_profit }}"
+                        data-type="bar"></canvas>
             </div>
         </div>
+    </div>
+</div>
 
-        <!-- Updated Pie Chart Structure -->
-        <div class="col-lg-6" style="flex: 1;">
-            <div class="au-card chart-percent-card" style="height: 300px; padding: 10px; box-sizing: border-box;">
-                <div class="au-card-inner" style="padding: 0; box-sizing: border-box;">
-                    <h3 class="title-2 tm-b-5" style="margin-bottom: 10px;">Percentage Distribution in Cash</h3>
-                    <div class="chart-container" style="height: calc(100% - 30px); width: 100%;">
-                        <canvas id="customPieChart" style="height: 100%; width: 100%;"></canvas>
-                    </div>
-                </div>
+<!-- Pie Chart for Percentage Distribution in Cash -->
+<div class="col-lg-6" style="flex: 1;">
+    <div class="au-card chart-percent-card" style="height: 325px; padding: 10px; box-sizing: border-box;">
+        <div class="au-card-inner" style="padding: 0; box-sizing: border-box;">
+            <h3 class="title-2 tm-b-5 mt-2" style="margin-bottom: 10px;">Percentage Distribution in Cash</h3>
+            <div class="chart-container" style="height: calc(100% - 30px); width: 100%;">
+                <canvas id="customPieChart"
+                        data-labels="{% for label in pie_labels %}{{ label }}{% if not loop.last %}, {% endif %}{% endfor %}"
+                        data-values="{% for value in pie_values %}{{ value }}{% if not loop.last %}, {% endif %}{% endfor %}"
+                        data-type="pie"></canvas>
             </div>
         </div>
+    </div>
+</div>
+
     </div>
 
                         <div class="row" id="table">
@@ -369,28 +369,11 @@
 													<div class="row">
     <div class="col-md-12">
         <!-- DATA TABLE -->
-        <h3 class="title-5 m-b-35">Holdings</h3>
+
         <div class="table-data__tool">
             <div class="table-data__tool-left">
-                <div class="rs-select2--light rs-select2--md">
-                    <select class="js-select2" name="property">
-                        <option selected="selected">All Properties</option>
-                        <option value="">Option 1</option>
-                        <option value="">Option 2</option>
-                    </select>
-                    <div class="dropDownSelect2"></div>
+                <h3 class="title-5 m-b-35 mt-2">Holdings</h3>
                 </div>
-                <div class="rs-select2--light rs-select2--sm">
-                    <select class="js-select2" name="time">
-                        <option selected="selected">Today</option>
-                        <option value="">3 Days</option>
-                        <option value="">1 Week</option>
-                    </select>
-                    <div class="dropDownSelect2"></div>
-                </div>
-                <button class="au-btn-filter">
-                    <i class="zmdi zmdi-filter-list"></i>filters</button>
-            </div>
             <div class="table-data__tool-right">
                 <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#modaltab1">
                     <i class="zmdi zmdi-plus"></i>add item</button>
@@ -424,9 +407,6 @@
 
                             <td>
                                 <div class="table-data-feature">
-                                    <button class="item" data-toggle="modal" data-placement="top" title="Add" data-target="#modaltab1">
-                                        <i class="zmdi zmdi-plus"></i>
-                                    </button>
                                     <button class="item" data-placement="top" title="Sell" data-toggle="modal" data-target="#deltab1">
                                         <i class="zmdi zmdi-money"></i>
                                     </button>
@@ -446,7 +426,7 @@
 													<div class="row">
     <div class="col-md-12">
         <!-- Transactions Table -->
-        <h3 class="title-5 m-b-35">Transactions</h3>
+        <h3 class="title-5 m-b-35 mt-2">Transactions</h3>
         <div class="table-responsive table-responsive-data2">
             <table class="table table-data2 table-bordered">
                 <thead>
@@ -503,9 +483,6 @@
                         <td>${{watchshort.price}}</td>
                         <td>
                             <div class="table-data-feature">
-                                <button class="item" data-toggle="modal" data-target="#modaltab3" title="Add">
-                                    <i class="zmdi zmdi-plus"></i>
-                                </button>
                                 <button class="item" data-toggle="modal" data-target="#deltab3" title="Delete">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
@@ -543,9 +520,6 @@
                         <td>${{watchlong.price}}</td>
                         <td>
                             <div class="table-data-feature">
-                                <button class="item" data-toggle="modal" data-target="#modaltab4" title="Add">
-                                    <i class="zmdi zmdi-plus"></i>
-                                </button>
                                 <button class="item" data-toggle="modal" data-target="#deltab4" title="Delete">
                                     <i class="zmdi zmdi-delete"></i>
                                 </button>
@@ -742,6 +716,50 @@
 				</div>
 			</div>
 			<!-- end modal table4 -->
+
+            <!-- modal table3 -->
+			<div class="modal fade" id="addcashmodal" tabindex="-1" role="dialog" aria-labelledby="scrollmodalLabel2" aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="scrollmodalLabel2">Add a new Watchlist</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">Add Cash</div>
+            <div class="card-body card-block">
+                <form action="{{ url_for('addcash') }}" method="post" class="">
+
+                    <!-- Cash Field -->
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-addon">
+                                <i class="fa fa-dollar"></i>
+                            </div>
+                            <input type="number" id="added_cash" name="added_cash" placeholder="Enter Cash" class="form-control" step="0.01" min="0">
+                        </div>
+                    </div>
+
+                    <div class="form-actions form-group">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- end modal table3 -->
                 <!-- modal deltable1 (now Sell Modal) -->
 <div class="modal fade" id="deltab1" tabindex="-1" role="dialog" aria-labelledby="staticModalLabel" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog modal-sm" role="document">
