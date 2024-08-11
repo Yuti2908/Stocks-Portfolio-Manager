@@ -6,6 +6,7 @@ user_bp = Blueprint('userDetails', __name__)
 @user_bp.route('/',methods=['GET'])
 def user_profits():
     result = user_profits_service();
+    print(result)
     return result
 
 

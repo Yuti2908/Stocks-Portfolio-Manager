@@ -33,13 +33,16 @@ def updateRealisedProfit(profit):
 
 def updateUnrealisedProfit():
     result = calculateUnrealisedProfitAndInvestedAmnt()
-    unrealisedProfit = result["unrealisedProfit"]
-    investedAmn = result["invested_amnt"]
-    print(unrealisedProfit)
-    query = "UPDATE user_table SET unrealised_profit = %s AND invested_amnt = %s"
+    unrealisedProfit = float(result["unrealisedProfit"])
+    investedAmn = float(result["invested_amnt"])
     conn = get_db_connection()
+    print("Checking",unrealisedProfit,investedAmn)
+    query = "UPDATE user_table SET unrealised_profit = %s, invested_amnt = %s WHERE user_id = 1"
+
     cur = conn.cursor()
+    print(cur)
     cur.execute(query, (unrealisedProfit,investedAmn))
+    print(cur)
     conn.commit()
     cur.close()
     conn.close()
@@ -53,6 +56,7 @@ def fetch_all_holdings():
     columns = [desc[0] for desc in cur.description]
     ticker_index = columns.index('ticker')
     ticker_values = [row[ticker_index] for row in holdings]
+    print("calling holdings")
     print(ticker_values)
     for ticker in ticker_values:
         closing_price = get_yahoo_data(ticker)
@@ -62,9 +66,10 @@ def fetch_all_holdings():
     conn.commit()
     cur.execute("SELECT * FROM holdings")
     holdings = cur.fetchall()
+    updateUnrealisedProfit()
     cur.close()
     conn.close()
-    updateUnrealisedProfit()
+
     return holdings
 
 def calculateUnrealisedProfitAndInvestedAmnt():
@@ -79,8 +84,9 @@ def calculateUnrealisedProfitAndInvestedAmnt():
     unrealisedProfit = 0
     invested_amnt=0
     for holding in holdings:
-        invested_amnt = invested_amnt + holding[quantity_index]*holding[buyPrice_index]
-        unrealisedProfit+=holding[quantity_index]*(-holding[buyPrice_index]+holding[currentPrice_index])
+        invested_amnt = (invested_amnt + holding[quantity_index]*holding[buyPrice_index])
+        unrealisedProfit+=(holding[quantity_index]*(-holding[buyPrice_index]+holding[currentPrice_index]))
+    conn.commit()
     cur.close()
     conn.close()
     return {"unrealisedProfit":unrealisedProfit, "invested_amnt":invested_amnt}
@@ -146,3 +152,6 @@ def update_holding(ticker,sellPrice,quantity):
         updateRealisedProfit(profit)
 
 
+if __name__=='__main__':
+    # updateUnrealisedProfit()
+    fetch_all_holdings()

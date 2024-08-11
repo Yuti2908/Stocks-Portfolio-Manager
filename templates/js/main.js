@@ -96,8 +96,8 @@
           labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           type: 'line',
           datasets: [{
-            data: [78, 81, 80, 45, 34, 12, 40],
-            label: 'Dataset',
+            data: [3000300,3500000, 4000000,3700000,4500000, 5000000, 4700000],
+            label: 'Networth(in USD)',
             backgroundColor: 'rgba(255,255,255,.1)',
             borderColor: 'rgba(255,255,255,.55)',
           },]
@@ -159,11 +159,11 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           type: 'line',
           datasets: [{
-            data: [1, 18, 9, 17, 34, 22],
-            label: 'Dataset',
+            data: [1000000,1300000,1500000,1700000,2000000,1500000,2200000],
+            label: 'Cash (in USD)',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
           },]
@@ -230,11 +230,11 @@
       var myChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           type: 'line',
           datasets: [{
-            data: [65, 59, 84, 84, 51, 55],
-            label: 'Dataset',
+            data: [2000300, 2200000, 2500000,2000000, 2500000, 3500000, 2500000],
+            label: 'Investments (in USD)',
             backgroundColor: 'transparent',
             borderColor: 'rgba(255,255,255,.55)',
           },]
@@ -300,11 +300,11 @@
       var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
           datasets: [
             {
-              label: "My First dataset",
-              data: [78, 81, 80, 65, 58, 75, 60, 75, 65, 60, 60, 75],
+              label: "Equity Assets",
+              data: [18, 13, 20, 25, 18, 22, 16],
               borderColor: "transparent",
               borderWidth: "0",
               backgroundColor: "rgba(255,255,255,.3)"

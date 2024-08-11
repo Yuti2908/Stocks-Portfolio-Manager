@@ -1,27 +1,25 @@
 import json
 
 from flask import Flask, render_template, request, redirect, url_for
-from app.Repository.holdings import fetch_all_holdings,check_ticker
+from app.Repository.holdings import fetch_all_holdings,check_ticker, updateUnrealisedProfit, updateRealisedProfit
 from app.Repository.transactions import fetch_all_transactions
 from app.Repository.watchlist import fetch_all_short_term_stock_watchlists, fetch_all_long_term_stock_watchlists
 from app.Services.holdings import add_holding, sell_user_holdings
 from app.Services.transactions import add_transaction
 from app.Services.watchlist import add_short_term_stock_watchlist, add_long_term_stock_watchlist, delete_stocks_watchlist_service
 from app.Services.user import add_cash_service
+from app.Repository.chart_distribution import percentage_distribution
+from app.Repository.user import user_profits_repository,add_cash_repository
 import os
+
 
 def create_app():
     app = Flask(__name__, template_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates", static_folder="D:\\projects\\Stocks-Portfolio-Manager\\templates")
-    # app.config.from_object('config')
-
-    # mysql.init_app(app)
-
     from app.Controller.transactions import transactions_bp
     from app.Controller.holdings import holdings_bp
     from app.Controller.watchlist import watchlist_bp
     from app.Controller.user import user_bp
     from app.Controller.chart_distribution import chart_distribution_bp
-    # from app.Controller.start import start_bp
 
     app.register_blueprint(transactions_bp, url_prefix='/transactions')
     app.register_blueprint(holdings_bp, url_prefix='/holdings')
@@ -77,12 +75,27 @@ def create_app():
             else:
                 dic['price'] = float(i[3])
             longlst.append(dic)
+        perdis=percentage_distribution()
+        pie_labels=perdis.keys()
+        pie_values=perdis.values()
+        updateUnrealisedProfit()
+        user=user_profits_repository()
+        realized_profits=user["realised_profit"]
+        unrealized_profits=user["unrealised_profit"]
+        cash=user["cash"]
+        invested_amount=user["invested_amnt"]
+        stocks=len(pie_labels)
+        print(realized_profits)
+        print("UNREALIZED PROFITS CHECK",unrealized_profits)
 
-        return render_template("index.html",holdings=lst,transactions=translst,watchlistshort=shortlst,watchlistlong=longlst)
+        print("percentage distribution:",perdis)
+
+        return render_template("index.html",holdings=lst,transactions=translst,watchlistshort=shortlst,watchlistlong=longlst, pie_labels=pie_labels,pie_values=pie_values,realized_profit=realized_profits,unrealized_profit=unrealized_profits,cash=cash,invested_amount=invested_amount, stocks=stocks)
 
     @app.route("/sellerror")
     def sellerror():
         return render_template("sellerror.html")
+
 
     @app.route("/addsuccess")
     def addsuccess():
@@ -154,9 +167,9 @@ def create_app():
 
     @app.route("/addcash", methods=['POST'])
     def addcash():
-        added_cash = request.form['added_cash']
+        added_cash = float(request.form['added_cash'])
         add_cash_service(added_cash)
-        return redirect(url_for('delsuccess'))
+        return redirect(url_for('addsuccess'))
 
     @app.route("/delwatchlong", methods=['POST'])
     def delwatchlong():
@@ -166,8 +179,6 @@ def create_app():
         return redirect(url_for('delsuccess'))
 
     return app
-
-
 
 if __name__=='__main__':
     app=create_app()
